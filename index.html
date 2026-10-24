@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A minimal VisionRipe prototype for produce-ripeness analysis and waste reduction."
+    />
+    <title>VisionRipe 1.0 — Prototype</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="header">
+        <p class="eyebrow"> PROTOTYPE · VERSION 1.0</p>
+        <h1>VisionRipe</h1>
+        <p>Scan produce, understand its condition, and use it before it becomes waste.</p>
+      </header>
+
+      <nav class="tabs" aria-label="Prototype sections">
+        <button class="tab active" data-view="scan">Scan</button>
+        <button class="tab" data-view="plan">
+          Plan <span id="plan-count" class="count">0</span>
+        </button>
+      </nav>
+
+      <section id="scan-view" class="view">
+        <article class="panel">
+          <h2>Analyze produce</h2>
+          <p class="muted">Choose one clear JPEG, PNG, GIF, or WebP image.</p>
+
+          <label class="upload">
+            <span>Choose a photo</span>
+            <input
+              id="image-input"
+              type="file"
+              accept="image/jpeg,image/png,image/gif,image/webp"
+            />
+          </label>
+
+          <img id="preview" class="preview hidden" alt="Selected produce preview" />
+
+          <button id="analyze-button" class="primary" disabled>
+            Analyze ripeness
+          </button>
+          <p id="status" class="status" role="status" aria-live="polite"></p>
+        </article>
+
+        <article id="result" class="panel hidden" aria-live="polite">
+          <div class="result-heading">
+            <div>
+              <p class="eyebrow">ANALYSIS RESULT</p>
+              <h2 id="result-name">Produce</h2>
+            </div>
+            <span id="result-stage" class="badge"></span>
+          </div>
+
+          <dl class="details">
+            <div>
+              <dt>Confidence</dt>
+              <dd id="result-confidence"></dd>
+            </div>
+            <div>
+              <dt>Condition</dt>
+              <dd id="result-status"></dd>
+            </div>
+            <div>
+              <dt>Best time</dt>
+              <dd id="result-time"></dd>
+            </div>
+            <div>
+              <dt>Storage</dt>
+              <dd id="result-storage"></dd>
+            </div>
+          </dl>
+
+          <div id="safety-warning" class="warning hidden">
+            <strong>Do not eat</strong>
+            <span id="safety-reason"></span>
+          </div>
+
+          <button id="add-button" class="primary">Add to local Plan</button>
+          <p class="disclaimer">
+            AI analysis is informational. Always use your own judgment for food safety.
+          </p>
+        </article>
+      </section>
+
+      <section id="plan-view" class="view hidden">
+        <article class="panel">
+          <h2>Use First plan</h2>
+          <p class="muted">Stored only in this browser. No account is required.</p>
+          <div id="plan-list" class="plan-list"></div>
+          <div id="empty-plan" class="empty">
+            <strong>Nothing planned yet</strong>
+            <span>Add safe produce from a scan.</span>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
